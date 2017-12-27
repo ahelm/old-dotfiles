@@ -1,11 +1,31 @@
 " make vim more vim like
 set nocompatible
 
-function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-endfunction
-
+"" ****************************************************************************
+"" Plugins
+"" ****************************************************************************
 call plug#begin('~/.vim/plugged')
 
+"" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme='bubblegum'
+
+"" Colorscheme
+Plug 'dracula/vim'
+
 call plug#end()
+
+"" ****************************************************************************
+"" FIXES
+"" ****************************************************************************
+" forces neovim to use english as default language
+if has("nvim")
+  language en_US
+endif
+
+"" ****************************************************************************
+"" Colorscheme settings
+"" ****************************************************************************
+syntax on
+color dracula

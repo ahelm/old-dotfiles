@@ -1,2 +1,8 @@
 # ignore editor directory
 .vscode
+
+# remove vim plugins from tracking
+editors/vim/plugged
+
+# generated links
+editors/vim/init.vim
