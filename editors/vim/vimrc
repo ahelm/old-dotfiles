@@ -6,13 +6,13 @@ set nocompatible
 "" ****************************************************************************
 call plug#begin('~/.vim/plugged')
 
-"" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='bubblegum'
 
-"" Colorscheme
 Plug 'dracula/vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-github-dashboard'
 
 call plug#end()
 
