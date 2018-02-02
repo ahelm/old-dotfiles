@@ -6,3 +6,6 @@ editors/vim/plugged
 
 # generated links
 editors/vim/init.vim
+
+# don't track netrw.vim files
+editors/vim/.netrw*
