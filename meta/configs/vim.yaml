@@ -6,4 +6,6 @@
 
 # check for later to install the plugins
 - shell:
-    - [vim -c 'PlugInstall' +qall, Installing vim plugins]
+    # needs to surpress exit status
+    # -> due to wrong interpretation of fzf exit
+    - ["vim -c 'PlugInstall!' +qall; exit 0", 'Install vim plugins']
