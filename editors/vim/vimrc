@@ -1,34 +1,104 @@
-"" ****************************************************************************
-"" Helpful settings
-"" ****************************************************************************
-autocmd! bufwritepost .vimrc source %       " reload vimrc if opened & saved
-let mapleader=","                           " use ',' as leader
-set nocompatible                            " make vim more vim like
-
-
-"" ****************************************************************************
-"" Plugins
-"" ****************************************************************************
+" vim: set foldmethod=marker foldlevel=0 nomodeline colorcolumn=80:
+" *****************************************************************************
+" {{{ Defaults settings
+" *****************************************************************************
+" check ':help default'
+unlet! skip_defaults_vim
+silent! source $VIMRUNTIME/defaults.vim
+" Check if on Mac
+let s:darwin = has('mac')
+" }}}
+" *****************************************************************************
+" {{{ Plugins - Installation
+" *****************************************************************************
+" Taken from junegunn's dotfiles
+if s:darwin
+  let g:plug_url_format = 'git@github.com:%s.git'
+else
+  let $GIT_SSL_NO_VERIFY = 'true'
+endif
+"
 call plug#begin('~/.vim/plugged')
-" Statusbar *******************************************************************
+"
+" Statusbar -------------------------------------------------------------------
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='bubblegum'     " nice Airline theme
-let g:airline_powerline_fonts = 1   " use better-looking Powerline symbols
-" Colortheme ******************************************************************
+"
+" Colorthemes -----------------------------------------------------------------
 Plug 'dracula/vim'
-" Alignment *******************************************************************
+" 
+" Alignmnet/Looks -------------------------------------------------------------
 Plug 'junegunn/vim-easy-align'
-" GitHub **********************************************************************
-Plug 'junegunn/vim-github-dashboard'
-" Git *************************************************************************
+Plug 'Yggdroot/indentLine'
+"
+" Git/GitHub ------------------------------------------------------------------
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-" NERDTree ********************************************************************
+Plug 'junegunn/vim-github-dashboard'
+"
+" Browsing --------------------------------------------------------------------
 Plug 'scrooloose/nerdtree'
-let g:NERDTreeMinimalUI = 1
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+"
+call plug#end()
+" }}}
+" *****************************************************************************
+" {{{ Basic Settings 
+" *****************************************************************************
+let mapleader=","                           " use ',' as leader
+set nocompatible                            " make vim more vim like
+" }}}
+" *****************************************************************************
+" {{{ Spaces and Tabs
+" *****************************************************************************
+set tabstop=2		    " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " number of spaces to use for indent
+set expandtab       " tabs are spaces
+" }}}
+" *****************************************************************************
+" {{{ UI config
+" *****************************************************************************
+syntax on                   " use syntax highlighting
+color dracula               " best Colorscheme ever
+set number                  " show line numbers
+set cursorline              " highlight current line
+set wildmenu                " visual autocomplete for command menu
+set lazyredraw              " redraw only when we need to.
+set showmatch               " highlight matching [{()}]
+filetype indent plugin on   " automatic lang-dependent ident
+set mouse=a                 " allow mouse usage
+" }}}
+" *****************************************************************************
+" {{{ Searching
+" *****************************************************************************
+set ignorecase      " case of normal letter is ignored
+set smartcase       " ignore case when lowercase letters only
+set incsearch       " search as characters are entered
+set hlsearch        " highlight matches
+" start search using space
+nnoremap <space> /
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+" }}}
+" *****************************************************************************
+" {{{ QuickFixes
+" *****************************************************************************
+" forces neovim to use english as default language
+if has("nvim")
+  language en_US
+endif
+" }}}
+" *****************************************************************************
+" {{{ Plugin - Configuration
+" *****************************************************************************
+" NERDTree --------------------------------------------------------------------
 " toggle NERDTree
 nnoremap <leader>n :NERDTreeToggle<CR>
+" Makes NERDTree look better
+let g:NERDTreeMinimalUI = 1
 " fold/unfold dirs & double click
 let NERDTreeMouseMode = 2
 " highlight selected entry in tree
@@ -46,7 +116,6 @@ autocmd bufenter *
   \       b:NERDTree.isTabTree()
   \   ) | q | endif
 " git support for Nerdtree
-Plug 'Xuyuanp/nerdtree-git-plugin'
 let g:NERDTreeIndicatorMapCustom = {
   \   "Modified"  : "✹",
   \   "Staged"    : "✚",
@@ -59,56 +128,9 @@ let g:NERDTreeIndicatorMapCustom = {
   \   'Ignored'   : '☒',
   \   "Unknown"   : "?"
   \   }
-" indent line
-Plug 'Yggdroot/indentLine'
+" identline -------------------------------------------------------------------
 let g:indentLine_char = '│'
-" fzf - finding things fast
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-call plug#end()
-
-
-"" ****************************************************************************
-"" Spaces and Tabs
-"" ****************************************************************************
-set tabstop=2		    " number of visual spaces per TAB
-set softtabstop=2   " number of spaces in tab when editing
-set shiftwidth=2    " number of spaces to use for indent
-set expandtab       " tabs are spaces
-
-
-"" ****************************************************************************
-"" UI config
-"" ****************************************************************************
-syntax on                   " use syntax highlighting
-color dracula               " best Colorscheme ever
-set number                  " show line numbers
-set cursorline              " highlight current line
-set wildmenu                " visual autocomplete for command menu
-set lazyredraw              " redraw only when we need to.
-set showmatch               " highlight matching [{()}]
-filetype indent plugin on   " automatic lang-dependent ident
-set mouse=a                 " allow mouse usage
-
-
-"" ****************************************************************************
-"" Searching
-"" ****************************************************************************
-set ignorecase      " case of normal letter is ignored
-set smartcase       " ignore case when lowercase letters only
-set incsearch       " search as characters are entered
-set hlsearch        " highlight matches
-" start search using space
-nnoremap <space> /
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
-
-
-"" ****************************************************************************
-"" FIXES
-"" ****************************************************************************
-" forces neovim to use english as default language
-if has("nvim")
-  language en_US
-endif
+" Airline ---------------------------------------------------------------------
+let g:airline_theme='bubblegum'     " nice Airline theme
+let g:airline_powerline_fonts = 1   " use better-looking Powerline symbols
 
