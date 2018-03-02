@@ -1,4 +1,4 @@
-" vim: set foldmethod=marker foldlevel=0 nomodeline colorcolumn=80:
+" vim: set foldmethod=marker foldlevel=0 nomodeline:
 " *****************************************************************************
 " {{{ Defaults settings
 " *****************************************************************************
@@ -11,13 +11,6 @@ let s:darwin = has('mac')
 " *****************************************************************************
 " {{{ Plugins - Installation
 " *****************************************************************************
-" Taken from junegunn's dotfiles
-if s:darwin
-  let g:plug_url_format = 'git@github.com:%s.git'
-else
-  let $GIT_SSL_NO_VERIFY = 'true'
-endif
-"
 call plug#begin('~/.vim/plugged')
 "
 " Statusbar -------------------------------------------------------------------
@@ -26,7 +19,7 @@ Plug 'vim-airline/vim-airline-themes'
 "
 " Colorthemes -----------------------------------------------------------------
 Plug 'dracula/vim'
-" 
+"
 " Alignmnet/Looks -------------------------------------------------------------
 Plug 'junegunn/vim-easy-align'
 Plug 'Yggdroot/indentLine'
@@ -41,11 +34,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" Coding support --------------------------------------------------------------
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
 "
 call plug#end()
 " }}}
 " *****************************************************************************
-" {{{ Basic Settings 
+" {{{ Basic Settings
 " *****************************************************************************
 let mapleader=","                           " use ',' as leader
 set nocompatible                            " make vim more vim like
@@ -70,6 +66,7 @@ set lazyredraw              " redraw only when we need to.
 set showmatch               " highlight matching [{()}]
 filetype indent plugin on   " automatic lang-dependent ident
 set mouse=a                 " allow mouse usage
+set clipboard+=unnamedplus  " using system clipboard on mac
 " }}}
 " *****************************************************************************
 " {{{ Searching
@@ -78,10 +75,6 @@ set ignorecase      " case of normal letter is ignored
 set smartcase       " ignore case when lowercase letters only
 set incsearch       " search as characters are entered
 set hlsearch        " highlight matches
-" start search using space
-nnoremap <space> /
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
 " }}}
 " *****************************************************************************
 " {{{ QuickFixes
@@ -96,7 +89,7 @@ endif
 " *****************************************************************************
 " NERDTree --------------------------------------------------------------------
 " toggle NERDTree
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <C-N> :NERDTreeToggle<CR>
 " Makes NERDTree look better
 let g:NERDTreeMinimalUI = 1
 " fold/unfold dirs & double click
@@ -129,8 +122,43 @@ let g:NERDTreeIndicatorMapCustom = {
   \   "Unknown"   : "?"
   \   }
 " identline -------------------------------------------------------------------
-let g:indentLine_char = '│'
+let g:indentLine_char = '▏'
 " Airline ---------------------------------------------------------------------
 let g:airline_theme='bubblegum'     " nice Airline theme
 let g:airline_powerline_fonts = 1   " use better-looking Powerline symbols
-
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#fnamemod = ':t'
+" Tags Configuration ----------------------------------------------------------
+let g:easytags_cmd = '/usr/local/bin/ctags'
+let g:easytags_suppress_ctags_warning = 1
+" }}}
+" *****************************************************************************
+" {{{ Keymaps
+" *****************************************************************************
+" Saving and Quiting
+noremap  <leader>w  :update<CR>
+vnoremap <leader>w  <C-C>:update<CR>
+inoremap <leader>w  <C-O>:update<CR>
+noremap  <leader>q  :quit<CR>
+" Tabs
+nnoremap <leader>n  :tabprevious<CR>
+nnoremap <leader>m  :tabnext<CR>
+inoremap <leader>n  <Esc>:tabprevious<CR>i
+inoremap <leader>m  <Esc>:tabnext<CR>i
+" Searching
+nnoremap <space>          /
+nnoremap <leader><space> :nohlsearch<CR>
+" FZF bindings
+noremap  <C-F>  :Files<CR>
+noremap  <C-G>  :GFiles<CR>
+noremap  <C-T>  :Tags<CR>
+noremap  <C-B>  :BTags<CR>
+" }}}
+" *****************************************************************************
+" {{{ Custom Functions and helper
+" *****************************************************************************
+" Remove trailing spaces on save
+autocmd BufWritePre * :%s/\s\+$//e
+" }}}
