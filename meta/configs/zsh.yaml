@@ -1,0 +1,3 @@
+- link:
+    ~/.zshrc: shells/zsh/zshrc
+    ~/.zplug: shells/zsh/zplug
