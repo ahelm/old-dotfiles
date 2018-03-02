@@ -147,6 +147,11 @@ nnoremap <leader>n  :tabprevious<CR>
 nnoremap <leader>m  :tabnext<CR>
 inoremap <leader>n  <Esc>:tabprevious<CR>i
 inoremap <leader>m  <Esc>:tabnext<CR>i
+" Window managment
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 " Searching
 nnoremap <space>          /
 nnoremap <leader><space> :nohlsearch<CR>
