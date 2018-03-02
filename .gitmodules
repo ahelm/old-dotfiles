@@ -6,3 +6,6 @@
 [submodule "shells/zsh/zplug"]
 	path = shells/zsh/zplug
 	url = https://github.com/zplug/zplug.git
+  branch = master
+  ignore = dirty
+
