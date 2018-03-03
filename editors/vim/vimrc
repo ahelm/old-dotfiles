@@ -130,9 +130,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#fnamemod = ':t'
-" Tags Configuration ----------------------------------------------------------
-let g:easytags_cmd = '/usr/local/bin/ctags'
-let g:easytags_suppress_ctags_warning = 1
 " }}}
 " *****************************************************************************
 " {{{ Keymaps
@@ -141,7 +138,8 @@ let g:easytags_suppress_ctags_warning = 1
 noremap  <leader>w  :update<CR>
 vnoremap <leader>w  <C-C>:update<CR>
 inoremap <leader>w  <C-O>:update<CR>
-noremap  <leader>q  :quit<CR>
+noremap  <leader>q  :bdelete<CR>
+noremap  <leader>Q  :qa<CR>
 " Tabs
 nnoremap <leader>n  :tabprevious<CR>
 nnoremap <leader>m  :tabnext<CR>
