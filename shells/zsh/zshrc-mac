@@ -1,10 +1,50 @@
 # vim: set foldmethod=marker foldlevel=0 nomodeline:
 # Custom PATH and enviroment options {{{
 # - setup PATH and MANPATH for using
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin"
-export MANPATH="/usr/local/man:$MANPATH"
+if [[ $OSTYPE == *darwin* ]]; then
+  export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin"
+  export MANPATH="/usr/local/man:$MANPATH"
+fi
+
 # - VisXD
-export IDL_PATH="<IDL_DEFAULT>:+/Users/anton/Documents/Projects/visxd"
+if [[ $HOST == mbp-anton ]]; then
+  VISXD_HOME="/Users/anton/Documents/Projects/visxd"
+fi
+
+if [ -d $VISXD_HOME ]; then
+  export IDL_PATH="<IDL_DEFAULT>:+${VISXD_HOME}"
+  unset VISXD_HOME
+fi
+# - Default editor
+if [ "$(command -v nvim)" ]; then
+  export EDITOR="nvim"
+else
+  export EDITOR="vim"
+fi
+
+if [ "$(command -v brew)" ]; then
+  export EDITOR="nvim"
+else
+  export EDITOR="vim"
+fi
+# - Load rbenv automatically by appending the following to ~/.zshrc:
+eval "$(rbenv init -)"
+
+# adds personal binaries
+if [[ $HOST == mbp-anton ]]; then
+  export PATH="/Users/anton/local/bin:$PATH"
+fi
+
+# homebrew specific building (best setup in terms of heat/progress)
+if [[ $HOST == mbp-anton ]]; then
+  export HOMEBREW_MAKE_JOBS=2
+fi
+
+# Anaconda bin
+if [ -d "/usr/local/anaconda3/bin" ]; then
+  export PATH="/usr/local/anaconda3/bin:$PATH"
+fi
+
 # - Locale settings {{{
 # fixes issues with promt on iTerm otherwise tab-compilation breaks the width
 # for the shell
@@ -16,8 +56,7 @@ export LC_MONETARY="en_US.UTF-8"
 export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-# }}}
-
+## }}}
 # }}}
 # Plugins {{{
 # - Using ZPLUG for configuration of zsh
@@ -29,6 +68,20 @@ zplug "dracula/zsh", as:theme
 
 # - syntax highlighting in a fast way
 zplug "zdharma/fast-syntax-highlighting"
+
+# - oh-my-zsh completion
+zplug "robbyrussell/oh-my-zsh", use:"lib/history.zsh"
+HYPHEN_INSENSITIVE="true"
+zplug "robbyrussell/oh-my-zsh", use:"lib/completion.zsh"
+zplug "robbyrussell/oh-my-zsh", use:"lib/git.zsh"
+zplug "robbyrussell/oh-my-zsh", use:"lib/clipboard.zsh", if:"[[ $OSTYPE == *darwin* ]]"
+zplug "robbyrussell/oh-my-zsh", use:"lib/misc.zsh"
+zplug "robbyrussell/oh-my-zsh", use:"lib/key-bindings.zsh"
+zplug "robbyrussell/oh-my-zsh", use:"lib/grep.zsh"
+zplug "robbyrussell/oh-my-zsh", use:"lib/directories.zsh"
+zplug "robbyrussell/oh-my-zsh", use:"lib/theme-and-appearance.zsh"
+zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "plugins/osx", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 
 # - install plugins if not installed yet
 if ! zplug check --verbose; then
@@ -47,11 +100,21 @@ if [ -f ~/.fzf.zsh ]; then
 else
   echo ".fzf.zsh not found! Check if fzf is installed!"
 fi
+
 # }}}
-# Brew based completions {{{
-fpath=(/usr/local/share/zsh-completions $fpath)
-# }}}
-# Fixes {{{
-# fix for 'cd ..' tab-completion
+# Custom settigns {{{
+# - fix for 'cd ..' tab-completion
 zstyle ':completion:*' special-dirs true
+
+# - Brew based completions
+if [ -d "/usr/local/share/zsh-completions" ]; then
+  fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+
+# - use hub as git interface (easier way to work with Github)
+if [ "$(command -v hub)" ]; then
+  alias git=hub
+fi
+
 # }}}
+
