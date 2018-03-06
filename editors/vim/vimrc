@@ -38,6 +38,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 "
+" Project based support -------------------------------------------------------
+Plug 'MarcWeber/vim-addon-local-vimrc'
+"
 call plug#end()
 " }}}
 " *****************************************************************************
