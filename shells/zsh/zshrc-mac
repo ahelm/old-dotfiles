@@ -116,5 +116,9 @@ if [ "$(command -v hub)" ]; then
   alias git=hub
 fi
 
+# - use nvim as vim
+if [ "$(command -v nvim)" ]; then
+  alias vim=nvim
+fi
 # }}}
 
