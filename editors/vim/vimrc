@@ -40,6 +40,11 @@ Plug 'majutsushi/tagbar'
 "
 " Project based support -------------------------------------------------------
 Plug 'MarcWeber/vim-addon-local-vimrc'
+" Auto-completion -------------------------------------------------------------
+" Completion Framework for Neovim & Vim8+ but will only be used with Neovim
+if has('nvim')
+  Plug 'roxma/nvim-completion-manager'
+endif
 "
 call plug#end()
 " }}}
