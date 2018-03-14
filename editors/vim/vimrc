@@ -164,8 +164,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " nvim-completion-manager -----------------------------------------------------
 inoremap <expr> <A-j> pumvisible() ? "\<C-n>" : "\<A-j>"
 inoremap <expr> <A-k> pumvisible() ? "\<C-p>" : "\<A-k>"
-" FZF -------------------------------------------------------------------------
-let g:fzf_action = { 'enter': 'tabedit' }
 " }}}
 " *****************************************************************************
 " {{{ Keymaps
