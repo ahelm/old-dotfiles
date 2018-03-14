@@ -8,6 +8,9 @@ editors/vim/plugged
 # generated links
 editors/vim/init.vim
 
+# remove spell directory from tracking
+editors/vim/spell
+
 # don't track netrw.vim files
 editors/vim/.netrw*
 

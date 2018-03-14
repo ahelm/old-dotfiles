@@ -45,6 +45,9 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
 if has('nvim')
   Plug 'roxma/nvim-completion-manager'
 endif
+" Language support ------------------------------------------------------------
+Plug 'plasticboy/vim-markdown'
+Plug 'JamshedVesuna/vim-markdown-preview'
 "
 call plug#end()
 " }}}
@@ -75,6 +78,23 @@ set showmatch               " highlight matching [{()}]
 filetype indent plugin on   " automatic lang-dependent ident
 set mouse=a                 " allow mouse usage
 set clipboard+=unnamedplus  " using system clipboard on mac
+" gui colors if running iTerm
+if $TERM_PROGRAM =~ "iTerm"
+  set termguicolors
+endif
+" color settings for working with dracula theme
+hi Pmenu    guifg=#f8f8f2 guibg=#646e96
+hi PmenuSel guifg=#282a36 guibg=#50fa7b
+" git gutter color
+hi GitGutterAdd          guifg=#50fa7b
+hi GitGutterChange       guifg=#f1fa8c
+hi GitGutterDelete       guifg=#ff5555
+hi GitGutterChangeDelete guifg=#f1fa8c
+" Add spelling to completion
+set complete+=kspell
+" Spelling highlight (currently not correctly working for undercurl)
+hi SpellBad gui=underline guifg=#ff5555
+hi SpellCap gui=underline guifg=#ffb86c
 " }}}
 " *****************************************************************************
 " {{{ Searching
@@ -138,6 +158,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#fnamemod = ':t'
+" nvim-completion-manager -----------------------------------------------------
+inoremap <expr> <A-j> pumvisible() ? "\<C-n>" : "\<A-j>"
+inoremap <expr> <A-k> pumvisible() ? "\<C-p>" : "\<A-k>"
 " }}}
 " *****************************************************************************
 " {{{ Keymaps
@@ -172,4 +195,32 @@ noremap  <C-B>  :BTags<CR>
 " *****************************************************************************
 " Remove trailing spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
+" }}}
+" *****************************************************************************
+" {{{ Custom language settings
+" *****************************************************************************
+" FORTRAN ---------------------------------------------------------------------
+autocmd FileType *.f03
+  \ let fortran_free_source=1 |   " force free source
+  \ let fortran_dialect = "f08"   " use modern fortran for Fortran 2003 files
+" Markdown --------------------------------------------------------------------
+let vim_markdown_preview_browser='Google Chrome'  " previewer plugin
+let vim_markdown_preview_github=1                 " default style for preview
+let g:vim_markdown_folding_disabled = 1           " annoying folding of Md
+let g:vim_markdown_conceal = 0                    " seems buggy with conceal
+autocmd BufRead,BufNewFile *.md setlocal spell    " automatically spell check
+" preview Markdown after saving it
+autocmd BufWritePost       *.md call Vim_Markdown_Preview()
+" Vagrant ---------------------------------------------------------------------
+au BufRead,BufNewFile Vagrantfile set filetype=ruby
+" Git Commits -----------------------------------------------------------------
+" Use spell checking for commits but don't check for capital letters
+autocmd FileType gitcommit
+  \ setlocal spell |
+  \ set spellcapcheck=
+" Python  ---------------------------------------------------------------------
+au BufRead,BufNewFile *.py
+  \ set tabstop=4		    " number of visual spaces per TAB
+  \ set softtabstop=4   " number of spaces in tab when editing
+  \ set shiftwidth=4    " number of spaces to use for indent
 " }}}
