@@ -34,9 +34,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+"
 " Coding support --------------------------------------------------------------
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
+Plug 'terryma/vim-expand-region'
+Plug 'scrooloose/nerdcommenter'
 "
 " Project based support -------------------------------------------------------
 Plug 'MarcWeber/vim-addon-local-vimrc'
@@ -161,6 +164,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " nvim-completion-manager -----------------------------------------------------
 inoremap <expr> <A-j> pumvisible() ? "\<C-n>" : "\<A-j>"
 inoremap <expr> <A-k> pumvisible() ? "\<C-p>" : "\<A-k>"
+" FZF -------------------------------------------------------------------------
+let g:fzf_action = { 'enter': 'tabedit' }
 " }}}
 " *****************************************************************************
 " {{{ Keymaps
