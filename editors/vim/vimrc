@@ -40,9 +40,12 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdcommenter'
+Plug 'Chiel92/vim-autoformat'
 "
 " Project based support -------------------------------------------------------
 Plug 'MarcWeber/vim-addon-local-vimrc'
+Plug 'tpope/vim-dispatch'
+"
 " Auto-completion -------------------------------------------------------------
 " Completion Framework for Neovim & Vim8+ but will only be used with Neovim
 if has('nvim')
@@ -59,6 +62,8 @@ call plug#end()
 " *****************************************************************************
 let mapleader=","                           " use ',' as leader
 set nocompatible                            " make vim more vim like
+set autoread                                " reload changed buffer
+au FocusGained,BufEnter   * :checktime      " update at change of focus
 " }}}
 " *****************************************************************************
 " {{{ Spaces and Tabs
@@ -67,6 +72,7 @@ set tabstop=2		    " number of visual spaces per TAB
 set softtabstop=2   " number of spaces in tab when editing
 set shiftwidth=2    " number of spaces to use for indent
 set expandtab       " tabs are spaces
+set autoindent      " automatically ident
 " }}}
 " *****************************************************************************
 " {{{ UI config
