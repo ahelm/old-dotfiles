@@ -40,7 +40,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Chiel92/vim-autoformat'
+" Plug 'Chiel92/vim-autoformat'
+Plug 'w0rp/ale'
 "
 " Project based support -------------------------------------------------------
 Plug 'MarcWeber/vim-addon-local-vimrc'
@@ -68,7 +69,7 @@ au FocusGained,BufEnter   * :checktime      " update at change of focus
 " *****************************************************************************
 " {{{ Spaces and Tabs
 " *****************************************************************************
-set tabstop=2		    " number of visual spaces per TAB
+set tabstop=2       " number of visual spaces per TAB
 set softtabstop=2   " number of spaces in tab when editing
 set shiftwidth=2    " number of spaces to use for indent
 set expandtab       " tabs are spaces
@@ -104,6 +105,9 @@ set complete+=kspell
 " Spelling highlight (currently not correctly working for undercurl)
 hi SpellBad gui=underline guifg=#ff5555
 hi SpellCap gui=underline guifg=#ffb86c
+" remove colors for Ale
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 " }}}
 " *****************************************************************************
 " {{{ Searching
@@ -135,29 +139,29 @@ let NERDTreeMouseMode = 2
 let NERDTreeHighlightCursorline = 1
 " ignore following extenstions
 let NERDTreeIgnore = [
-  \ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-  \ '\.o$', '\.so$', '\.egg$', '^\.git$',
-  \ '__pycache__', '\.DS_Store'
-  \ ]
+      \ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
+      \ '\.o$', '\.so$', '\.egg$', '^\.git$',
+      \ '__pycache__', '\.DS_Store'
+      \ ]
 " close vim if only NERDTree is opened
 autocmd bufenter *
-  \   if (winnr("$") == 1 &&
-  \       exists("b:NERDTree") &&
-  \       b:NERDTree.isTabTree()
-  \   ) | q | endif
+      \   if (winnr("$") == 1 &&
+      \       exists("b:NERDTree") &&
+      \       b:NERDTree.isTabTree()
+      \   ) | q | endif
 " git support for Nerdtree
 let g:NERDTreeIndicatorMapCustom = {
-  \   "Modified"  : "✹",
-  \   "Staged"    : "✚",
-  \   "Untracked" : "✭",
-  \   "Renamed"   : "➜",
-  \   "Unmerged"  : "═",
-  \   "Deleted"   : "✖",
-  \   "Dirty"     : "✗",
-  \   "Clean"     : "✔︎",
-  \   'Ignored'   : '☒',
-  \   "Unknown"   : "?"
-  \   }
+      \   "Modified"  : "✹",
+      \   "Staged"    : "✚",
+      \   "Untracked" : "✭",
+      \   "Renamed"   : "➜",
+      \   "Unmerged"  : "═",
+      \   "Deleted"   : "✖",
+      \   "Dirty"     : "✗",
+      \   "Clean"     : "✔︎",
+      \   'Ignored'   : '☒',
+      \   "Unknown"   : "?"
+      \   }
 " identline -------------------------------------------------------------------
 let g:indentLine_char = '▏'
 " Airline ---------------------------------------------------------------------
@@ -170,6 +174,15 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " nvim-completion-manager -----------------------------------------------------
 inoremap <expr> <A-j> pumvisible() ? "\<C-n>" : "\<A-j>"
 inoremap <expr> <A-k> pumvisible() ? "\<C-p>" : "\<A-k>"
+" vim-autoformat --------------------------------------------------------------
+" au InsertLeave,BufWrite * :Autoformat
+" Ale -------------------------------------------------------------------------
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '?'
+"
 " }}}
 " *****************************************************************************
 " {{{ Keymaps
@@ -214,8 +227,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 " *****************************************************************************
 " FORTRAN ---------------------------------------------------------------------
 autocmd FileType *.f03
-  \ let fortran_free_source=1 |   " force free source
-  \ let fortran_dialect = "f08"   " use modern fortran for Fortran 2003 files
+      \ let fortran_free_source=1 |   " force free source
+      \ let fortran_dialect = "f08"   " use modern fortran for Fortran 2003 files
 " Markdown --------------------------------------------------------------------
 let vim_markdown_preview_browser='Google Chrome'  " previewer plugin
 let vim_markdown_preview_github=1                 " default style for preview
@@ -229,11 +242,11 @@ au BufRead,BufNewFile Vagrantfile set filetype=ruby
 " Git Commits -----------------------------------------------------------------
 " Use spell checking for commits but don't check for capital letters
 autocmd FileType gitcommit
-  \ setlocal spell |
-  \ set spellcapcheck=
+      \ setlocal spell |
+      \ set spellcapcheck=
 " Python  ---------------------------------------------------------------------
 au BufRead,BufNewFile *.py
-  \ set tabstop=4		    " number of visual spaces per TAB
-  \ set softtabstop=4   " number of spaces in tab when editing
-  \ set shiftwidth=4    " number of spaces to use for indent
+      \ set tabstop=4       " number of visual spaces per TAB
+      \ set softtabstop=4   " number of spaces in tab when editing
+      \ set shiftwidth=4    " number of spaces to use for indent
 " }}}
