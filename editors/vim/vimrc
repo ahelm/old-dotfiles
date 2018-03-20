@@ -246,7 +246,8 @@ autocmd FileType gitcommit
       \ set spellcapcheck=
 " Python  ---------------------------------------------------------------------
 au BufRead,BufNewFile *.py
-      \ set tabstop=4       " number of visual spaces per TAB
-      \ set softtabstop=4   " number of spaces in tab when editing
-      \ set shiftwidth=4    " number of spaces to use for indent
+      \ set tabstop=4               " number of visual spaces per TAB
+      \ set softtabstop=4           " number of spaces in tab when editing
+      \ set shiftwidth=4            " number of spaces to use for indent
+      \ let python_highlight_all=1  " enable all python syntax features
 " }}}
