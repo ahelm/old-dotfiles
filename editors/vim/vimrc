@@ -105,9 +105,9 @@ set complete+=kspell
 " Spelling highlight (currently not correctly working for undercurl)
 hi SpellBad gui=underline guifg=#ff5555
 hi SpellCap gui=underline guifg=#ffb86c
-" remove colors for Ale
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
+" colors for Ale matching dracula theme
+hi ALEErrorSign   guifg=#ff5555 guibg=#282a36
+hi ALEWarningSign guifg=#f1fa8c guibg=#282a36
 " }}}
 " *****************************************************************************
 " {{{ Searching
@@ -181,7 +181,7 @@ let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '?'
+let g:ale_sign_warning = '⚠︎'
 "
 " }}}
 " *****************************************************************************
@@ -194,10 +194,10 @@ inoremap <leader>w  <C-O>:update<CR>
 noremap  <leader>q  :bdelete<CR>
 noremap  <leader>Q  :qa<CR>
 " Tabs
-nnoremap <leader>n  :tabprevious<CR>
-nnoremap <leader>m  :tabnext<CR>
-inoremap <leader>n  <Esc>:tabprevious<CR>i
-inoremap <leader>m  <Esc>:tabnext<CR>i
+nnoremap <leader>n  :bprevious<CR>
+nnoremap <leader>m  :bnext<CR>
+inoremap <leader>n  <Esc>:bprevious<CR>i
+inoremap <leader>m  <Esc>:bnext<CR>i
 " Window managment
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -225,6 +225,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 " *****************************************************************************
 " {{{ Custom language settings
 " *****************************************************************************
+" OSIRIS  ---------------------------------------------------------------------
+autocmd BufNewFile,BufRead osiris_sys.*
+      \ set syntax=make               " syntax for OSIRIS config files
 " FORTRAN ---------------------------------------------------------------------
 autocmd FileType *.f03
       \ let fortran_free_source=1 |   " force free source
@@ -248,6 +251,7 @@ autocmd FileType gitcommit
 au BufRead,BufNewFile *.py
       \ set tabstop=4               " number of visual spaces per TAB
       \ set softtabstop=4           " number of spaces in tab when editing
+      \ set expandtab               " use spaces for python
       \ set shiftwidth=4            " number of spaces to use for indent
       \ let python_highlight_all=1  " enable all python syntax features
 " }}}
