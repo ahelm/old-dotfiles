@@ -147,15 +147,15 @@ autocmd bufenter *
       \   ) | q | endif
 " git support for Nerdtree
 let g:NERDTreeIndicatorMapCustom = {
-      \   "Modified"  : "✹",
-      \   "Staged"    : "✚",
+      \   "Modified"  : "✶",
+      \   "Staged"    : "⊻",
       \   "Untracked" : "✭",
-      \   "Renamed"   : "➜",
+      \   "Renamed"   : "→",
       \   "Unmerged"  : "═",
-      \   "Deleted"   : "✖",
+      \   "Deleted"   : "✕",
       \   "Dirty"     : "✗",
       \   "Clean"     : "✔︎",
-      \   'Ignored'   : '☒',
+      \   "Ignored"   : "‼︎",
       \   "Unknown"   : "?"
       \   }
 " identline -------------------------------------------------------------------
