@@ -23,6 +23,7 @@ Plug 'dracula/vim'
 " Alignmnet/Looks -------------------------------------------------------------
 Plug 'junegunn/vim-easy-align'
 Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
 "
 " Git/GitHub ------------------------------------------------------------------
 Plug 'tpope/vim-fugitive'
@@ -178,6 +179,8 @@ let g:ale_set_highlights = 0
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠︎'
+" autopairs -------------------------------------------------------------------
+let g:AutoPairsFlyMode = 1
 "
 " }}}
 " *****************************************************************************
