@@ -159,6 +159,7 @@ let g:NERDTreeIndicatorMapCustom = {
       \   }
 " identline -------------------------------------------------------------------
 let g:indentLine_char = '▏'
+let g:indentLine_color_gui = '#424450'
 " Airline ---------------------------------------------------------------------
 let g:airline_theme='bubblegum'     " nice Airline theme
 let g:airline_powerline_fonts = 1   " use better-looking Powerline symbols
