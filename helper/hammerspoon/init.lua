@@ -16,6 +16,8 @@ usbKeyboardLayout = hs.usb.watcher.new(corsairKeyboard)
 usbKeyboardLayout:start()
 
 -- Turn off Wifi Apples Ethernet Adapter is connected
+-- TODO: check if connected to internet then turn
+--       wifi off
 usbEthernetAdapter = nil
 
 function appleEthernetAdapter(data)
