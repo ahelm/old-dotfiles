@@ -1,4 +1,4 @@
-" vim: set foldmethod=marker foldlevel=0 nomodeline:
+" vim: set foldmethod=marker foldlevel=0 nomodeline colorcolumn=80:
 " *****************************************************************************
 " {{{ Defaults settings
 " *****************************************************************************
@@ -92,22 +92,17 @@ set clipboard+=unnamedplus  " using system clipboard on mac
 if $TERM_PROGRAM =~ "iTerm"
   set termguicolors
 endif
+" colors for Ale matching dracula theme
+hi ALEErrorSign   guifg=#ff5555 guibg=#282a36
+hi ALEWarningSign guifg=#f1fa8c guibg=#282a36
 " color settings for working with dracula theme
 hi Pmenu    guifg=#f8f8f2 guibg=#646e96
 hi PmenuSel guifg=#282a36 guibg=#50fa7b
-" git gutter color
-hi GitGutterAdd          guifg=#50fa7b
-hi GitGutterChange       guifg=#f1fa8c
-hi GitGutterDelete       guifg=#ff5555
-hi GitGutterChangeDelete guifg=#f1fa8c
 " Add spelling to completion
 set complete+=kspell
 " Spelling highlight (currently not correctly working for undercurl)
 hi SpellBad gui=underline guifg=#ff5555
 hi SpellCap gui=underline guifg=#ffb86c
-" colors for Ale matching dracula theme
-hi ALEErrorSign   guifg=#ff5555 guibg=#282a36
-hi ALEWarningSign guifg=#f1fa8c guibg=#282a36
 " }}}
 " *****************************************************************************
 " {{{ Searching
