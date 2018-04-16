@@ -22,12 +22,6 @@ else
   export EDITOR="vim"
 fi
 
-# - changes how many cores to use for `make -j`
-if [ "$(command -v brew)" ]; then
-  let hw_cores="$(sysctl -n hw.ncpu)/2"
-  export HOMEBREW_MAKE_JOBS=$hw_cores
-  unset hw_cores
-fi
 # - Load rbenv automatically by appending the following to ~/.zshrc:
 eval "$(rbenv init -)"
 
