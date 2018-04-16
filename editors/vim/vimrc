@@ -7,6 +7,12 @@ unlet! skip_defaults_vim
 silent! source $VIMRUNTIME/defaults.vim
 " Check if on Mac
 let s:darwin = has('mac')
+" use conda enviroment installed neovim. inspired by
+" https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
+if has('nvim')
+  let g:python_host_prog = '/usr/local/anaconda3/envs/neovim2/bin/python'
+  let g:python3_host_prog = '/usr/local/anaconda3/envs/neovim3/bin/python'
+endif
 " }}}
 " *****************************************************************************
 " {{{ Plugins - Installation
