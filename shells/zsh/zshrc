@@ -2,16 +2,18 @@
 # Custom PATH and enviroment options {{{
 # - setup PATH and MANPATH for using
 if [[ $OSTYPE == *darwin* ]]; then
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/TeX/texbin"
-  export MANPATH="/usr/local/man:$MANPATH"
+  export PATH="/opt/X11/bin:/Library/TeX/texbin:${PATH}"
+  export PATH="/usr/bin:/bin:/usr/sbin:/sbin:${PATH}"
+  export PATH="/usr/local/sbin:/usr/local/bin:${PATH}"
+  export MANPATH="/usr/local/man:${MANPATH}"
 fi
 
 # - VisXD
-if [[ $HOST == mbp-anton ]]; then
+if [[ "$HOST" == mbp-anton ]]; then
   VISXD_HOME="/Users/anton/Documents/Projects/visxd"
 fi
 
-if [ -d $VISXD_HOME ]; then
+if [ -d "$VISXD_HOME" ]; then
   export IDL_PATH="<IDL_DEFAULT>:+${VISXD_HOME}"
   unset VISXD_HOME
 fi
@@ -25,19 +27,17 @@ fi
 # - Load rbenv automatically by appending the following to ~/.zshrc:
 eval "$(rbenv init -)"
 
-# adds personal binaries
-if [[ $HOST == mbp-anton ]]; then
-  export PATH="/Users/anton/local/bin:$PATH"
-fi
-
-# homebrew specific building (best setup in terms of heat/progress)
-if [[ $HOST == mbp-anton ]]; then
+# - specific settings to MacBook Pro 13
+if [[ "$HOST" == mbp-anton ]]; then
+  # adds personal binaries
+  export PATH="/Users/anton/local/bin:${PATH}"
+  # homebrew specific building (best setup in terms of heat/progress)
   export HOMEBREW_MAKE_JOBS=2
 fi
 
 # Anaconda bin
 if [ -d "/usr/local/anaconda3/bin" ]; then
-  export PATH="/usr/local/anaconda3/bin:$PATH"
+  export PATH="/usr/local/anaconda3/bin:${PATH}"
 fi
 
 # - Locale settings {{{
@@ -55,7 +55,7 @@ export LC_ALL="en_US.UTF-8"
 # }}}
 # Plugins {{{
 # - Using ZPLUG for configuration of zsh
-export ZPLUG_HOME=$HOME/.zplug
+export ZPLUG_HOME="${HOME}/.zplug"
 source $ZPLUG_HOME/init.zsh
 
 # - use dracula theme
@@ -69,14 +69,14 @@ zplug "robbyrussell/oh-my-zsh", use:"lib/history.zsh"
 HYPHEN_INSENSITIVE="true"
 zplug "robbyrussell/oh-my-zsh", use:"lib/completion.zsh"
 zplug "robbyrussell/oh-my-zsh", use:"lib/git.zsh"
-zplug "robbyrussell/oh-my-zsh", use:"lib/clipboard.zsh", if:"[[ $OSTYPE == *darwin* ]]"
+zplug "robbyrussell/oh-my-zsh", use:"lib/clipboard.zsh", if:"[[ ${OSTYPE} == *darwin* ]]"
 zplug "robbyrussell/oh-my-zsh", use:"lib/misc.zsh"
 zplug "robbyrussell/oh-my-zsh", use:"lib/key-bindings.zsh"
 zplug "robbyrussell/oh-my-zsh", use:"lib/grep.zsh"
 zplug "robbyrussell/oh-my-zsh", use:"lib/directories.zsh"
 zplug "robbyrussell/oh-my-zsh", use:"lib/theme-and-appearance.zsh"
 zplug "plugins/common-aliases", from:oh-my-zsh
-zplug "plugins/osx", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+zplug "plugins/osx", from:oh-my-zsh, if:"[[ ${OSTYPE} == *darwin* ]]"
 
 # - install plugins if not installed yet
 # if ! zplug check --verbose; then
