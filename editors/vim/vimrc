@@ -3,7 +3,7 @@
 " {{{ Defaults settings
 " *****************************************************************************
 " check ':help default'
-unlet! skip_defaults_vim
+unlet! g:skip_defaults_vim
 silent! source $VIMRUNTIME/defaults.vim
 " Check if on Mac
 let s:darwin = has('mac')
@@ -68,8 +68,10 @@ call plug#end()
 " *****************************************************************************
 " {{{ Basic Settings
 " *****************************************************************************
-let mapleader=","                           " use ',' as leader
-set nocompatible                            " make vim more vim like
+let g:mapleader=','                         " use ',' as leader
+if !has('nvim')
+  set nocompatible                          " make vim more vim like
+endif
 set autoread                                " reload changed buffer
 au FocusGained,BufEnter   * :checktime      " update at change of focus
 " }}}
@@ -96,7 +98,7 @@ filetype indent plugin on   " automatic lang-dependent ident
 set mouse=a                 " allow mouse usage
 set clipboard+=unnamedplus  " using system clipboard on mac
 " gui colors if running iTerm
-if $TERM_PROGRAM =~ "iTerm"
+if $TERM_PROGRAM =~? 'iTerm'
   set termguicolors
 endif
 " colors for Ale matching dracula theme
@@ -123,7 +125,7 @@ set hlsearch        " highlight matches
 " {{{ QuickFixes
 " *****************************************************************************
 " forces neovim to use english as default language
-if has("nvim")
+if has('nvim')
   language en_US
 endif
 " }}}
@@ -136,11 +138,11 @@ nnoremap <C-N> :NERDTreeToggle<CR>
 " Makes NERDTree look better
 let g:NERDTreeMinimalUI = 1
 " fold/unfold dirs & double click
-let NERDTreeMouseMode = 2
+let g:NERDTreeMouseMode = 2
 " highlight selected entry in tree
-let NERDTreeHighlightCursorline = 1
+let g:NERDTreeHighlightCursorline = 1
 " ignore following extenstions
-let NERDTreeIgnore = [
+let g:NERDTreeIgnore = [
       \ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
       \ '\.o$', '\.so$', '\.egg$', '^\.git$',
       \ '__pycache__', '\.DS_Store'
@@ -153,16 +155,16 @@ autocmd bufenter *
       \   ) | q | endif
 " git support for Nerdtree
 let g:NERDTreeIndicatorMapCustom = {
-      \   "Modified"  : "✶",
-      \   "Staged"    : "⊻",
-      \   "Untracked" : "✭",
-      \   "Renamed"   : "→",
-      \   "Unmerged"  : "═",
-      \   "Deleted"   : "✕",
-      \   "Dirty"     : "✗",
-      \   "Clean"     : "✔︎",
-      \   "Ignored"   : "‼︎",
-      \   "Unknown"   : "?"
+      \   'Modified'  : '✶',
+      \   'Staged'    : '⊻',
+      \   'Untracked' : '✭',
+      \   'Renamed'   : '→',
+      \   'Unmerged'  : '═',
+      \   'Deleted'   : '✕',
+      \   'Dirty'     : '✗',
+      \   'Clean'     : '✔︎',
+      \   'Ignored'   : '‼︎',
+      \   'Unknown'   : '?'
       \   }
 " identline -------------------------------------------------------------------
 let g:indentLine_char = '▏'
@@ -217,7 +219,7 @@ noremap  <C-G>  :GFiles<CR>
 noremap  <C-T>  :Tags<CR>
 noremap  <C-B>  :BTags<CR>
 " use Mac OSX shortcuts for copying and pasting
-if $TERM_PROGRAM =~ "iTerm"
+if $TERM_PROGRAM =~? 'iTerm'
   vnoremap <M-c> "+y
 endif
 " }}}
@@ -225,31 +227,31 @@ endif
 " {{{ Custom Functions and helper
 " *****************************************************************************
 " Remove trailing spaces on save
-autocmd BufWritePre * :%s/\s\+$//e
+au BufWritePre * :%s/\s\+$//e
 " }}}
 " *****************************************************************************
 " {{{ Custom language settings
 " *****************************************************************************
 " OSIRIS  ---------------------------------------------------------------------
-autocmd BufNewFile,BufRead osiris_sys.*
+au BufNewFile,BufRead osiris_sys.*
       \ set syntax=make               " syntax for OSIRIS config files
 " FORTRAN ---------------------------------------------------------------------
-autocmd FileType *.f03
+au FileType *.f03
       \ let fortran_free_source=1 |   " force free source
       \ let fortran_dialect = "f08"   " use modern fortran for Fortran 2003 files
 " Markdown --------------------------------------------------------------------
-let vim_markdown_preview_browser='Google Chrome'  " previewer plugin
-let vim_markdown_preview_github=1                 " default style for preview
-let g:vim_markdown_folding_disabled = 1           " annoying folding of Md
-let g:vim_markdown_conceal = 0                    " seems buggy with conceal
-autocmd BufRead,BufNewFile *.md setlocal spell    " automatically spell check
+let g:vim_markdown_preview_browser='Google Chrome'  " previewer plugin
+let g:vim_markdown_preview_github=1                 " default style for preview
+let g:vim_markdown_folding_disabled = 1             " annoying folding of Md
+let g:vim_markdown_conceal = 0                      " seems buggy with conceal
+autocmd BufRead,BufNewFile *.md setlocal spell      " automatically spell check
 " preview Markdown after saving it
-autocmd BufWritePost       *.md call Vim_Markdown_Preview()
+au BufWritePost       *.md call Vim_Markdown_Preview()
 " Vagrant ---------------------------------------------------------------------
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
 " Git Commits -----------------------------------------------------------------
 " Use spell checking for commits but don't check for capital letters
-autocmd FileType gitcommit
+au FileType gitcommit
       \ setlocal spell |
       \ set spellcapcheck=
 " Python  ---------------------------------------------------------------------
