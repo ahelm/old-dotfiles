@@ -134,6 +134,8 @@ endif
 " *****************************************************************************
 " {{{ Plugin - Configuration
 " *****************************************************************************
+" makes plugins get triggered faster - like gitgutter
+set updatetime=100
 " NERDTree --------------------------------------------------------------------
 " toggle NERDTree
 nnoremap <C-N> :NERDTreeToggle<CR>
