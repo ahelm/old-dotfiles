@@ -202,7 +202,7 @@ let g:AutoPairsFlyMode = 1
 noremap  <leader>w  :update<CR>
 vnoremap <leader>w  <C-C>:update<CR>
 inoremap <leader>w  <C-O>:update<CR>
-noremap  <leader>q  :bdelete<CR>
+nnoremap <leader>q  :lclose<bar>b#<bar>bd #<CR><Paste>
 noremap  <leader>Q  :qa<CR>
 " Tabs
 nnoremap <leader>n  :bprevious<CR>
@@ -242,7 +242,8 @@ au BufNewFile,BufRead osiris_sys.*
 " FORTRAN ---------------------------------------------------------------------
 au FileType *.f03
       \ let fortran_free_source=1 |   " force free source
-      \ let fortran_dialect = "f08"   " use modern fortran for Fortran 2003 files
+      \ let fortran_dialect = "f08"   " use modern fortran for Fortran 2003
+			\ set expandtab									" use spaces instead of tab
 " Markdown --------------------------------------------------------------------
 let g:vim_markdown_preview_browser='Google Chrome'  " previewer plugin
 let g:vim_markdown_preview_github=1                 " default style for preview
