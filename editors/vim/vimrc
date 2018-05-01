@@ -96,7 +96,6 @@ color dracula               " best Colorscheme ever
 set number                  " show line numbers
 set cursorline              " highlight current line
 set wildmenu                " visual autocomplete for command menu
-set lazyredraw              " redraw only when we need to.
 set showmatch               " highlight matching [{()}]
 filetype indent plugin on   " automatic lang-dependent ident
 set mouse=a                 " allow mouse usage
