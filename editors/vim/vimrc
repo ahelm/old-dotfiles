@@ -185,8 +185,11 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#fnamemod = ':t'
 " deoplete completion ---------------------------------------------------------
+" start deoplete from beginning
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+" use smart case for completion
+call deoplete#custom#option('smart_case', v:true)
+" use alt key to select completion suggestion
 inoremap <expr> <A-j> pumvisible() ? "\<C-n>" : "\<A-j>"
 inoremap <expr> <A-k> pumvisible() ? "\<C-p>" : "\<A-k>"
 " vim-autoformat --------------------------------------------------------------
