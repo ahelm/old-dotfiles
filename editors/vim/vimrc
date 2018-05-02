@@ -47,7 +47,6 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'terryma/vim-expand-region'
 Plug 'scrooloose/nerdcommenter'
-" Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale'
 "
 " Project based support -------------------------------------------------------
@@ -57,7 +56,11 @@ Plug 'tpope/vim-dispatch'
 " Auto-completion -------------------------------------------------------------
 " Completion Framework for Neovim & Vim8+ but will only be used with Neovim
 if has('nvim')
-  Plug 'roxma/nvim-completion-manager'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 " Language support ------------------------------------------------------------
 Plug 'plasticboy/vim-markdown'
@@ -181,7 +184,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#fnamemod = ':t'
-" nvim-completion-manager -----------------------------------------------------
+" deoplete completion ---------------------------------------------------------
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
 inoremap <expr> <A-j> pumvisible() ? "\<C-n>" : "\<A-j>"
 inoremap <expr> <A-k> pumvisible() ? "\<C-p>" : "\<A-k>"
 " vim-autoformat --------------------------------------------------------------
