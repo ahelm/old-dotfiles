@@ -1,10 +1,7 @@
 # Dotfiles
 
-This repository contains my personal dotfiles. To install the dotfiles, I
-utilized a tool, called
-[dotfiles](https://pypi.python.org/pypi/dotfiles#configuration). In addition,
-this repository is inspired by different repositories containing dotfiles and
-machine configurations found all over GitHub and the web.
+This repository contains my personal dotfiles. The tool
+[dotbot](https://github.com/anishathalye/dotbot) is used to setup the dotfiles.
 
 ## Structure of the dotfiles
 
