@@ -5,7 +5,7 @@
 [core]
 	whitespace = -trailing-space,-space-before-tab,-indent-with-non-tab
 	editor = nvim
-	excludesfile = /Users/anton/.gitignore
+	excludesfile = ~/.gitignore
 
 [commit]
 	verbose = true

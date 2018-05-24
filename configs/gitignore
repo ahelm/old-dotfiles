@@ -1,0 +1,16 @@
+# tag files inside project home
+.tags*
+tags
+tags.*
+
+# virtualenv links inside python projects
+venv
+
+# atom's silent sync
+silent-sync.json
+
+# files which have my name inside
+*anton*
+
+# exclude VScode config files
+.vscode
