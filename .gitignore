@@ -1,7 +1,3 @@
-# ignore editor directory
-.vscode
-tags
-
 # remove vim plugins from tracking
 editors/vim/plugged
 
