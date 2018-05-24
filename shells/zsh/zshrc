@@ -25,7 +25,9 @@ else
 fi
 
 # - Load rbenv automatically by appending the following to ~/.zshrc:
-eval "$(rbenv init -)"
+if [ "$(command -v rbenv)" ]; then
+  eval "$(rbenv init -)"
+fi
 
 # - specific settings to MacBook Pro 13
 if [[ "$HOST" == mbp-anton ]]; then
