@@ -121,3 +121,7 @@ if [ "$(command -v nvim)" ]; then
 fi
 # }}}
 
+# adds MiniConda to path
+if [ -d "${HOME}/miniconda3/bin" ]; then
+  export PATH="${HOME}/miniconda3/bin:$PATH"
+fi
