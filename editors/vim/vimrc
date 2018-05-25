@@ -10,8 +10,13 @@ let s:darwin = has('mac')
 " use conda enviroment installed neovim. inspired by
 " https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 if has('nvim')
-  let g:python_host_prog = '/usr/local/anaconda3/envs/neovim2/bin/python'
-  let g:python3_host_prog = '/usr/local/anaconda3/envs/neovim3/bin/python'
+  " use indexing to remove line break in system call
+  let b:conda_path = system('conda info --base')[:-2]
+  " using conda to install dependencies specified in different python
+  " enviroments
+  let g:python_host_prog = b:conda_path.'/envs/neovim2/bin/python'
+  let g:python3_host_prog = b:conda_path.'/envs/neovim3/bin/python'
+  unlet b:conda_path
 endif
 " }}}
 " *****************************************************************************
