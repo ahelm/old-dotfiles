@@ -36118,7 +36118,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>455 896 608 77 0 0 3840 2138 </string>
+	<string>151 290 608 77 0 0 1680 1028 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>269 545 606 456 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
