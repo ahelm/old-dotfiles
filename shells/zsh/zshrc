@@ -37,12 +37,19 @@ if [[ "$HOST" == mbp-anton ]]; then
   export HOMEBREW_MAKE_JOBS=2
 fi
 
-# Anaconda bin
-if [ -d "/usr/local/anaconda3/bin" ]; then
-  export PATH="/usr/local/anaconda3/bin:${PATH}"
+# enable conda enviroment
+if [[ "$HOST" == mbp-anton ]]; then
+  # own MacBook use previous installed anaconda enviroment
+  BASE_CONDA="/usr/local/anaconda3"
+else
+  # set conda base to miniconda install
+  BASE_CONDA="${HOME}/miniconda3"
 fi
 
-# - Locale settings {{{
+if [ -f "${BASE_CONDA}/etc/profile.d/conda.sh" ]; then
+  . ${BASE_CONDA}/etc/profile.d/conda.sh
+fi
+# - Locale settings
 # fixes issues with promt on iTerm otherwise tab-compilation breaks the width
 # for the shell
 export LANG="en_US.UTF-8"
@@ -53,7 +60,6 @@ export LC_MONETARY="en_US.UTF-8"
 export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-## }}}
 # }}}
 # Plugins {{{
 # - Using ZPLUG for configuration of zsh
@@ -121,7 +127,3 @@ if [ "$(command -v nvim)" ]; then
 fi
 # }}}
 
-# adds MiniConda to path
-if [ -d "${HOME}/miniconda3/bin" ]; then
-  export PATH="${HOME}/miniconda3/bin:$PATH"
-fi
