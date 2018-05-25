@@ -9,3 +9,6 @@
   branch = master
   ignore = dirty
 
+[submodule "meta/dotbot-brew"]
+	path = meta/dotbot-brew
+	url = https://github.com/d12frosted/dotbot-brew.git
