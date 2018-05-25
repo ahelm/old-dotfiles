@@ -11,7 +11,7 @@ let s:darwin = has('mac')
 " https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 if has('nvim')
   " use indexing to remove line break in system call
-  let b:conda_path = system('conda info --base')[:-2]
+  let b:conda_path = $BASE_CONDA
   " using conda to install dependencies specified in different python
   " enviroments
   let g:python_host_prog = b:conda_path.'/envs/neovim2/bin/python'

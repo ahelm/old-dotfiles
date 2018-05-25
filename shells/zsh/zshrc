@@ -40,10 +40,10 @@ fi
 # enable conda enviroment
 if [[ "$HOST" == mbp-anton ]]; then
   # own MacBook use previous installed anaconda enviroment
-  BASE_CONDA="/usr/local/anaconda3"
+  export BASE_CONDA="/usr/local/anaconda3"
 else
   # set conda base to miniconda install
-  BASE_CONDA="${HOME}/miniconda3"
+  export BASE_CONDA="${HOME}/miniconda3"
 fi
 
 if [ -f "${BASE_CONDA}/etc/profile.d/conda.sh" ]; then
