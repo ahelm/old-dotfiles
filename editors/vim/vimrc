@@ -10,7 +10,7 @@ let s:darwin = has('mac')
 " use conda enviroment installed neovim. inspired by
 " https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 if has('nvim')
-  " use indexing to remove line break in system call
+  " add here a check if enviroment variable is define and prompt if not
   let b:conda_path = $BASE_CONDA
   " using conda to install dependencies specified in different python
   " enviroments
