@@ -9,3 +9,5 @@
 
 [commit]
 	verbose = true
+[credential]
+	helper = store
