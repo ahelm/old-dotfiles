@@ -1,4 +1,4 @@
-- taps:
+- tap:
   - caskroom/cask
   - caskroom/fonts
   - caskroom/versions
