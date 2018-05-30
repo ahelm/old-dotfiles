@@ -236,10 +236,8 @@ noremap  <C-F>  :Files<CR>
 noremap  <C-G>  :GFiles<CR>
 noremap  <C-T>  :Tags<CR>
 noremap  <C-B>  :BTags<CR>
-" use Mac OSX shortcuts for copying and pasting
-if $TERM_PROGRAM =~? 'iTerm'
-  vnoremap <M-c> "+y
-endif
+" unbind `Q` to enter in ex mode
+map Q <Nop>
 " }}}
 " *****************************************************************************
 " {{{ Custom Functions and helper
