@@ -9,7 +9,9 @@ if [[ $OSTYPE == *darwin* ]]; then
 fi
 
 # - VisXD
-if [[ "$HOST" == mbp-anton ]]; then
+# split by dot if needed
+host_split=("${(@s/./)HOST}")
+if [[ "$HOST" == "mbp-anton" || "${host_split[1]}" == "epp-167" ]]; then
   VISXD_HOME="/Users/anton/Documents/Projects/visxd"
 fi
 
