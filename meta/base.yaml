@@ -11,5 +11,3 @@
 - link:
     ~/.dotfiles: ''
 
-- shell:
-    - ["git submodule update --recursive --remote", "Update gitbot"]
