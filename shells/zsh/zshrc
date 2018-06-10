@@ -127,5 +127,8 @@ fi
 if [ "$(command -v nvim)" ]; then
   alias vim=nvim
 fi
+
+# - make tree be aware of color and also ignore files
+alias tree="tree -C -I '*pycache*'"
 # }}}
 
