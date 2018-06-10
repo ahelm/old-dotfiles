@@ -74,6 +74,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Helper plugins --------------------------------------------------------------
 Plug 'wincent/terminus'
+Plug 'janko-m/vim-test'
 "
 call plug#end()
 " }}}
@@ -207,6 +208,11 @@ let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠︎'
 " autopairs -------------------------------------------------------------------
 let g:AutoPairsFlyMode = 0
+" vim-test
+" make test commands execute using dispatch.vim
+if has('nvim')
+  let test#strategy = "neovim"
+endif
 "
 " }}}
 " *****************************************************************************
@@ -255,7 +261,7 @@ au BufNewFile,BufRead osiris_sys.*
 au FileType *.f03
       \ let fortran_free_source=1 |   " force free source
       \ let fortran_dialect = "f08"   " use modern fortran for Fortran 2003
-			\ set expandtab									" use spaces instead of tab
+      \ set expandtab                 " use spaces instead of tab
 " Markdown --------------------------------------------------------------------
 let g:vim_markdown_preview_browser='Google Chrome'  " previewer plugin
 let g:vim_markdown_preview_github=1                 " default style for preview
