@@ -75,6 +75,8 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 " Helper plugins --------------------------------------------------------------
 Plug 'wincent/terminus'
 Plug 'janko-m/vim-test'
+" local plugins ---------------------------------------------------------------
+Plug '~/Documents/Projects/vim-osiris'
 "
 call plug#end()
 " }}}
