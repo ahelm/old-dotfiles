@@ -10,6 +10,7 @@ let s:darwin = has('mac')
 " use conda enviroment installed neovim. inspired by
 " https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 if has('nvim')
+  " TODO: check if `BASE_CONDA` is not empty
   " add here a check if enviroment variable is define and prompt if not
   let b:conda_path = $BASE_CONDA
   " using conda to install dependencies specified in different python
@@ -233,6 +234,8 @@ endif
 noremap  <leader>w  :update<CR>
 vnoremap <leader>w  <C-C>:update<CR>
 inoremap <leader>w  <C-O>:update<CR>
+" TODO: still buggy and not fully satiesfied check if better option is
+"       available
 nnoremap <leader>q  :lclose<bar>b#<bar>bd #<CR><Paste>
 noremap  <leader>Q  :qa<CR>
 " Tabs
