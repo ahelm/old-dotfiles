@@ -68,10 +68,16 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 " Language support ------------------------------------------------------------
+" Markdown
 Plug 'plasticboy/vim-markdown'
 Plug 'JamshedVesuna/vim-markdown-preview'
+"
+" Python
+Plug 'zchee/deoplete-jedi'
 " better Python highlighter which is syntax aware - good, but requires tweaks
 " Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+"
+" Vim
 " Helper plugins --------------------------------------------------------------
 Plug 'wincent/terminus'
 Plug 'janko-m/vim-test'
@@ -200,6 +206,9 @@ call deoplete#custom#option('smart_case', v:true)
 " use alt key to select completion suggestion
 inoremap <expr> <A-j> pumvisible() ? "\<C-n>" : "\<A-j>"
 inoremap <expr> <A-k> pumvisible() ? "\<C-p>" : "\<A-k>"
+" show doc string for jedi
+let g:deoplete#sources#jedi#show_docstring = 1
+"
 " vim-autoformat --------------------------------------------------------------
 " au InsertLeave,BufWrite * :Autoformat
 " Ale -------------------------------------------------------------------------
