@@ -236,7 +236,7 @@ vnoremap <leader>w  <C-C>:update<CR>
 inoremap <leader>w  <C-O>:update<CR>
 " TODO: still buggy and not fully satiesfied check if better option is
 "       available
-nnoremap <leader>q  :lclose<bar>b#<bar>bd #<CR><Paste>
+nnoremap <leader>q  :bd<CR>
 noremap  <leader>Q  :qa<CR>
 " Tabs
 nnoremap <leader>n  :bprevious<CR>
