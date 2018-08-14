@@ -14,3 +14,8 @@ silent-sync.json
 
 # exclude VScode config files
 .vscode
+.cache
+
+# pytest based cache directory
+.pytest_cache
+
