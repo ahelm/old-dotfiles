@@ -51,6 +51,12 @@ fi
 if [ -f "${BASE_CONDA}/etc/profile.d/conda.sh" ]; then
   . ${BASE_CONDA}/etc/profile.d/conda.sh
 fi
+
+# - sources local RUST installation
+if [ -d "${HOME}/.cargo" ]; then
+  source ${HOME}/.cargo/env
+fi
+
 # - Locale settings
 # fixes issues with promt on iTerm otherwise tab-compilation breaks the width
 # for the shell
