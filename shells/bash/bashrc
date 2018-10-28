@@ -1,0 +1,17 @@
+# vscode and other editors might require enviroment variables which are defined
+# in zshrc
+# enable conda enviroment
+if [[ "$HOST" == mbp-anton ]]; then
+  # own MacBook use previous installed anaconda enviroment
+  export BASE_CONDA="/usr/local/anaconda3"
+else
+  # set conda base to miniconda install
+  export BASE_CONDA="${HOME}/miniconda3"
+fi
+
+if [ -f "${BASE_CONDA}/etc/profile.d/conda.sh" ]; then
+  . ${BASE_CONDA}/etc/profile.d/conda.sh
+fi
+
+# setup fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
