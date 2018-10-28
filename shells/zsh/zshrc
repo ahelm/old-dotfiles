@@ -11,7 +11,7 @@ fi
 # - VisXD
 # split by dot if needed
 host_split=("${(@s/./)HOST}")
-if [[ "$HOST" == "mbp-anton" || "${host_split[1]}" == "epp-167" ]]; then
+if [[ "$HOST" == "mbp-anton" || "${host_split[1]}" == "epp-167" || "${host_split[1]}" == "pulsar" ]]; then
   VISXD_HOME="/Users/anton/Documents/Projects/visxd"
 fi
 
