@@ -57,6 +57,11 @@ if [ -d "${HOME}/.cargo" ]; then
   source ${HOME}/.cargo/env
 fi
 
+# - source intel compiler enviroment
+if [ -f "/opt/intel/compilers_and_libraries/mac/bin/compilervars.sh" ]; then
+  source /opt/intel/compilers_and_libraries/mac/bin/compilervars.sh intel64 -platform mac
+fi
+
 # - Locale settings
 # fixes issues with promt on iTerm otherwise tab-compilation breaks the width
 # for the shell
