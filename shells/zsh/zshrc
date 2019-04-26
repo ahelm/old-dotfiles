@@ -141,5 +141,8 @@ fi
 
 # - make tree be aware of color and also ignore files
 alias tree="tree -C -I '*pycache*'"
+
+# - make `conda activate` alias
+alias ca="conda activate"
 # }}}
 
