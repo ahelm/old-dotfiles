@@ -40,13 +40,14 @@ if [[ "$HOST" == mbp-anton ]]; then
 fi
 
 # enable conda enviroment
-if [[ "$HOST" == mbp-anton ]]; then
-  # own MacBook use previous installed anaconda enviroment
-  export BASE_CONDA="/usr/local/anaconda3"
-else
-  # set conda base to miniconda install
-  export BASE_CONDA="${HOME}/miniconda3"
-fi
+# if [[ "$HOST" == mbp-anton ]]; then
+#   # own MacBook use previous installed anaconda enviroment
+#   export BASE_CONDA="/usr/local/anaconda3"
+# else
+#   # set conda base to miniconda install
+#   export BASE_CONDA="${HOME}/miniconda3"
+# fi
+export BASE_CONDA="${HOME}/miniconda3"
 
 if [ -f "${BASE_CONDA}/etc/profile.d/conda.sh" ]; then
   . ${BASE_CONDA}/etc/profile.d/conda.sh
@@ -73,6 +74,11 @@ export LC_MONETARY="en_US.UTF-8"
 export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
+
+# - use iterm2 integration
+if [ -f "${HOME}/.iterm2_shell_integration.zsh" ]; then
+  source ~/.iterm2_shell_integration.zsh
+fi
 # }}}
 # Plugins {{{
 # - Using ZPLUG for configuration of zsh
@@ -97,7 +103,7 @@ zplug "robbyrussell/oh-my-zsh", use:"lib/grep.zsh"
 zplug "robbyrussell/oh-my-zsh", use:"lib/directories.zsh"
 zplug "robbyrussell/oh-my-zsh", use:"lib/theme-and-appearance.zsh"
 zplug "plugins/common-aliases", from:oh-my-zsh
-zplug "plugins/osx", from:oh-my-zsh, if:"[[ ${OSTYPE} == *darwin* ]]"
+# zplug "plugins/osx", from:oh-my-zsh, if:"[[ ${OSTYPE} == *darwin* ]]"
 
 # - install plugins if not installed yet
 # if ! zplug check --verbose; then
@@ -144,5 +150,39 @@ alias tree="tree -C -I '*pycache*'"
 
 # - make `conda activate` alias
 alias ca="conda activate"
-# }}}
 
+# Load pyenv automatically by appending
+# the following to ~/.zshrc:
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# - PIPENV is to verbose
+export PIPENV_VERBOSITY=-1
+
+# - Cargo for rusr
+if [ -d "$HOME/.cargo" ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+if [ -d "$HOME/.poetry" ]; then
+  export PATH="$HOME/.poetry/bin:$PATH"
+  rm -f ~/.zcompdump; compinit
+fi
+
+# run ipdb
+function pydb() {
+  poetry version 2>&1 > /dev/null
+  if [ $? -eq 0 ]; then
+    poetry run ipython -c "%run -d ${*}"
+  else
+    ipython -c "%run -d ${*}"
+  fi
+}
+
+export GPG_TTY=$(tty)
+export HYPOTHESIS_PROFILE=dev
+
+alias trash="rmtrash"
+alias del="rmtrash"
+# }}}
+alias config='/usr/bin/git --git-dir=/Users/anton/.cfg/ --work-tree=/Users/anton'
